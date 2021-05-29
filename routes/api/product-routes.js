@@ -11,8 +11,7 @@ router.get('/', async (req, res) => {
   } catch (error) {
     console.error(error);
   }
-  // find all products
-  // be sure to include its associated Category and Tag data
+
 });
 
 // get one product
