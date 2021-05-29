@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 // get one product
 router.get("/:id", async (req, res) => {
   try {
-    const queryResults = await Product.findByPk(req.params.id, { include: [Category, Tag] })
+    const queryResults = await Product.findByPk(req.params.id, { include: [Category, Tag] });
     queryResults ? res.json(queryResults) : res.status(404).json({ message: "Could not find a product with that ID" });
   } catch (error) {
     console.error(error);
@@ -98,18 +98,18 @@ router.put("/:id", (req, res) => {
     });
 });
 
+// delete a product by id.
 router.delete("/:id", async (req, res) => {
   try {
-    const queryResponse = await Product.destroy({ where: { id: req.params.id } })
+    const queryResponse = await Product.destroy({ where: { id: req.params.id } });
     if (queryResponse) {
-      res.status(200).json({ message: `Deleted item ${req.params.id}` })
+      res.status(200).json({ message: `Deleted item ${req.params.id}` });
     } else {
-      res.status(400).json({message: `Item ID:${req.params.id} could not be found.`})
+      res.status(400).json({ message: `Item ID:${req.params.id} could not be found.` });
     }
-
   } catch (error) {
     console.error(error);
-    res.status(500)
+    res.status(500);
   }
 });
 
