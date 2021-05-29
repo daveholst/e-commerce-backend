@@ -4,5 +4,6 @@
 
 - [x] Setup Heroku
 - [x] Hook into JawsDB (hosted on heroku)
-- [ ] Setup Models + Relationships
+- [x] Setup Models + Relationships
 - [ ] Check routes
+- [ ] re-write routes
