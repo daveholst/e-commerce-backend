@@ -41,12 +41,39 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
+// update a tag's name by its `id` value
+router.put('/:id', async (req, res) => {
+  try {
+    if (req.body.tag_name) {
+      await Tag.update(req.body, {
+        where: {
+          id: req.params.id,
+        },
+      })
+      res.status(200).json({message: `Tag ID: ${req.params.id} updated. `})
+    } else {
+      res.status(400).json(
+        { message: 'PUT request for new tag requires an attribute object {tag_name: \'catName\'}' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
 });
 
-router.delete('/:id', (req, res) => {
-  // delete on tag by its `id` value
+// delete on tag by its `id` value
+router.delete('/:id', async (req, res) => {
+  try {
+    const queryResponse = await Tag.destroy({ where: { id: req.params.id } });
+    if (queryResponse) {
+      res.status(200).json({ message: `Deleted Tag ${req.params.id}` });
+    } else {
+      res.status(400).json({ message: `Tag ID:${req.params.id} could not be found.` });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
 });
 
 module.exports = router;
